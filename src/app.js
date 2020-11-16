@@ -2,7 +2,7 @@ import { http } from './api';
 import { ui } from './ui'
 
 
-document.addEventListener('DOMContentLoaded', getPosts)
+document.addEventListener('DOMContentLoaded', getBooks)
 
 document.querySelector('.post-submit').addEventListener('click', submitPost)
 
@@ -10,7 +10,7 @@ document.querySelector('.show-book').addEventListener('click', enableEdit)
 document.querySelector('form').addEventListener('click', cancelEdit)
 document.querySelector('.show-book').addEventListener('click', deleteBook)
 
-function getPosts() {
+function getBooks() {
     http.get(`http://localhost:3000/posts`)
         .then(books => {
             ui.showBook(books)
@@ -41,7 +41,7 @@ function submitPost(e) {
                 .then(book => {
                     ui.showAlert('book Added', 'alert alert-success')
 
-                    getPosts()
+                    getBooks()
                 })
                 .catch(err => console.log(err))
         } else {
@@ -50,8 +50,6 @@ function submitPost(e) {
                     ui.showAlert('book Upddated', 'alert alert-success')
                     ui.changeFormState('add')
 
-
-                    getPosts()
                 })
                 .catch(err => console.log(err))
 
